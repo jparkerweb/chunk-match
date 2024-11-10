@@ -85,6 +85,10 @@ console.log(results);
     - `chunkPrefixDocument` (string): Prefix for document chunks (for embedding models that support task prefixes) (default: null)
     - `chunkPrefixQuery` (string): Prefix for query chunk (for embedding models that support task prefixes) (default: null)
 
+#### Note on Model Loading
+
+The first time you use a specific embedding model, it will take longer to process as the model needs to be downloaded and cached locally. Subsequent uses will be much faster since the cached model will be used.
+
 #### Returns
 
 Array of match results, each containing:

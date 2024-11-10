@@ -3,7 +3,7 @@
 .github/
 node_modules/
 models/
-example/
+highlightjs/
 
 # file patterns to ignore during indexing
 package-lock.json
