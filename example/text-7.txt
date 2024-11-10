@@ -1,0 +1,3 @@
+I am working on an NLP project, and I am wondering why we use cosine similarity to compare transformer embeddings instead of some other distance calculation like Euclidean distance.
+I understand that for other text-to-vec features (tfidf, word2vec, etc.), the magnitude increases as the length of the text increases. In this circumstance, I understand why we would care about the angle between vectors instead of distance.
+For transformers, I can't find any resource that says that the magnitude of transformer embeddings increases with the size of the text. Is this the case? Because if the magnitude doesn't increase, why would we use cosine similarity instead of a distance metric?
