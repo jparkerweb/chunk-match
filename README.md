@@ -63,27 +63,27 @@ console.log(results);
 
 #### Parameters
 
-- `documents` (Array): Array of document objects with properties:
+- `documents` **required** (Array): Array of document objects with properties:
   - `document_name` (string): Name/identifier of the document
   - `document_text` (string): Text content to be chunked and matched
 
-- `query` (string): The search query to match against documents
+- `query` **required** (string): The search query to match against documents
 
-- `options` (Object): Configuration options
+- `options` **optional** (Object): Configuration options
   - `maxResults` (number): Maximum number of results to return (default: 10)
   - `minSimilarity` (number): Minimum similarity threshold for matches (default: 0.475)
   - `chunkingOptions` (Object): Options for text chunking
-    - `maxTokenSize` (number): Maximum token size for chunks
-    - `similarityThreshold` (number): Threshold for semantic similarity
-    - `dynamicThresholdLowerBound` (number): Lower bound for dynamic thresholding
-    - `dynamicThresholdUpperBound` (number): Upper bound for dynamic thresholding
-    - `numSimilaritySentencesLookahead` (number): Number of sentences to look ahead
-    - `combineChunks` (boolean): Whether to combine similar chunks
-    - `combineChunksSimilarityThreshold` (number): Threshold for combining chunks
-    - `onnxEmbeddingModel` (string): ONNX model to use for embeddings (see Models section below)
-    - `onnxEmbeddingModelQuantized` (boolean): Use quantized model version for better performance
-    - `chunkPrefixDocument` (string): Prefix for document chunks
-    - `chunkPrefixQuery` (string): Prefix for query chunks
+    - `maxTokenSize` (number): Maximum token size for chunks (default: 500)
+    - `similarityThreshold` (number): Threshold for semantic similarity (default: 0.5)
+    - `dynamicThresholdLowerBound` (number): Lower bound for dynamic thresholding (default: 0.475)
+    - `dynamicThresholdUpperBound` (number): Upper bound for dynamic thresholding (default: 0.8)
+    - `numSimilaritySentencesLookahead` (number): Number of sentences to look ahead (default: 2)
+    - `combineChunks` (boolean): Whether to combine similar chunks (default: true)
+    - `combineChunksSimilarityThreshold` (number): Threshold for combining chunks (default: 0.6)
+    - `onnxEmbeddingModel` (string): ONNX model to use for embeddings (see Models section below) (default: `Xenova/all-MiniLM-L6-v2`)
+    - `onnxEmbeddingModelQuantized` (boolean): Use quantized model version for better performance (default: `true`)
+    - `chunkPrefixDocument` (string): Prefix for document chunks (for embedding models that support task prefixes) (default: null)
+    - `chunkPrefixQuery` (string): Prefix for query chunk (for embedding models that support task prefixes) (default: null)
 
 #### Returns
 
