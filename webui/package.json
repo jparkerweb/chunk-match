@@ -1,19 +1,48 @@
 {
-  "name": "semantic-chunking-webui",
-  "version": "1.1.5",
+  "name": "chunk-match-webui",
+  "version": "1.0.0",
   "type": "module",
-  "description": "Web UI for semantic-chunking library",
+  "description": "Web UI for chunk-match library",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jparkerweb/chunk-match.git"
+  },
+  "keywords": [
+    "semantic",
+    "chunking",
+    "text-chunking",
+    "semantic-chunking",
+    "semantic-analysis",
+    "cosine-similarity",
+    "text-similarity",
+    "query-matching",
+    "text-matching",
+    "text-embedding",
+    "natural-language-processing",
+    "nlp",
+    "information-retrieval",
+    "nodejs",
+    "javascript",
+    "search",
+    "text-analysis",
+    "data-matching",
+    "embedding",
+    "text-processing",
+    "similarity-matching"
+  ],
+  "author": "Justin Parker",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jparkerweb/chunk-match/issues"
+  },
+  "homepage": "https://github.com/jparkerweb/chunk-match#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.18.3",
-    "highlight.js": "^11.10.0"
+    "express": "^4.18.3"
   }
 }
