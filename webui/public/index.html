@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🕵️ Chunk Match Web UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="/vendor/highlightjs/styles/gradient-dark.min.css">
+    <script src="/vendor/highlightjs/highlight.min.js"></script>
+    <script src="/vendor/highlightjs/languages/json.min.js"></script>
+    <script src="/vendor/highlightjs/languages/javascript.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="top-links">
+            <a href="https://github.com/jparkerweb/chunk-match" class="top-link -github" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 16 16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+                GitHub
+            </a>
+            <a href="https://ko-fi.com/jparkerweb" class="top-link -support" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24">
+                    <path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/>
+                </svg>
+                Support
+            </a>
+        </div>
+        
+        <h1 class="title"><a href="/">🕵️ Chunk Match Web UI</a></h1>
+        <div class="subtitle">Sandbox to tune your chunk match settings to get the best results for your use case</div>
+        
+        <div class="content-wrapper">
+            <div class="form-wrapper">
+                <form id="chunkForm">
+                    <div class="form-content">
+                        <div class="form-section">
+                            <h3>Documents</h3>
+                            <div id="documents-container">
+                                <div class="document-entry">
+                                    <div class="form-group document-name-group">
+                                        <label for="documentName">Document Name:</label>
+                                        <div class="input-with-buttons">
+                                            <input type="text" name="documentName" value="sample text" required>
+                                            <div class="document-buttons">
+                                                <button type="button" class="secondary-button" data-file="sample1" data-tooltip="load example text document 1">sample1.txt</button>
+                                                <button type="button" class="secondary-button" data-file="sample2" data-tooltip="load example text document 2">sample2.txt</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="documentText">Document Text:</label>
+                                        <textarea name="documentText" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" id="addDocument" class="secondary-button">Add Another Document</button>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Query</h3>
+                            <div class="form-group">
+                                <label for="query">Search Query:</label>
+                                <textarea id="query" name="query" required placeholder="Enter your search query here...">What are LLMs?</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Match Settings</h3>
+                            <div class="form-group">
+                                <label for="maxResults">Max Results (1-100):</label>
+                                <input type="range" id="maxResults" name="maxResults" min="1" max="100" step="1" value="10">
+                                <span class="value-display"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="minSimilarity">Minimum Similarity (0.1-1.0):</label>
+                                <input type="range" id="minSimilarity" name="minSimilarity" min="0.1" max="1.0" step="0.025" value="0.475">
+                                <span class="value-display"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Chunking Settings</h3>
+                            <div class="form-group">
+                                <label for="maxTokenSize">Max Token Size (50-2500):</label>
+                                <input type="range" id="maxTokenSize" name="maxTokenSize" min="50" max="2500" step="25" value="500">
+                                <span class="value-display"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="similarityThreshold">Similarity Threshold (0.1-1.0):</label>
+                                <input type="range" id="similarityThreshold" name="similarityThreshold" min="0.1" max="1.0" step="0.025" value="0.5">
+                                <span class="value-display"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="numSimilaritySentencesLookahead">Similarity Sentences Lookahead (1-10):</label>
+                                <input type="range" id="numSimilaritySentencesLookahead" name="numSimilaritySentencesLookahead" min="1" max="10" step="1" value="2">
+                                <span class="value-display"></span>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>Dynamic Threshold Settings</h3>
+                                <div class="form-group">
+                                    <label for="dynamicThresholdLowerBound">Dynamic Threshold Lower Bound (0.1-1.0):</label>
+                                    <input type="range" id="dynamicThresholdLowerBound" name="dynamicThresholdLowerBound" min="0.1" max="1.0" step="0.025" value="0.475">
+                                    <span class="value-display"></span>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="dynamicThresholdUpperBound">Dynamic Threshold Upper Bound (0.1-1.0):</label>
+                                    <input type="range" id="dynamicThresholdUpperBound" name="dynamicThresholdUpperBound" min="0.1" max="1.0" step="0.025" value="0.8">
+                                    <span class="value-display"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>Combine Chunks Settings</h3>
+                                <div class="form-group">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="white-space--nowrap" for="combineChunks">Combine Chunks:</label>
+                                            <label class="switch">
+                                                <input type="checkbox" id="combineChunks" name="combineChunks" checked>
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-group depends-on-combine-chunks">
+                                            <label for="combineChunksSimilarityThreshold">Combine Chunks Similarity Threshold (0.1-1.0):</label>
+                                            <input type="range" id="combineChunksSimilarityThreshold" name="combineChunksSimilarityThreshold" min="0.1" max="1.0" step="0.025" value="0.6">
+                                            <span class="value-display"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Model Settings</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <div class="label-with-info">
+                                        <label for="onnxEmbeddingModel">Embedding Model:</label>
+                                        <span class="info-icon" title="Click for more info">ⓘ</span>
+                                    </div>
+                                    <select id="onnxEmbeddingModel" name="onnxEmbeddingModel">
+                                        <!-- Options will be populated by JavaScript -->
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="onnxEmbeddingModelQuantized">Quantized Model:</label>
+                                    <label class="switch">
+                                        <input type="checkbox" id="onnxEmbeddingModelQuantized" name="onnxEmbeddingModelQuantized" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Prefix Settings</h3>
+                            <div class="form-group">
+                                <label for="chunkPrefixDocument">Document Chunk Prefix:</label>
+                                <label class="sub-label">For embedding models that support task prefixes</label>
+                                <input type="text" id="chunkPrefixDocument" name="chunkPrefixDocument" placeholder="e.g., search_document">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="chunkPrefixQuery">Query Chunk Prefix:</label>
+                                <label class="sub-label">For embedding models that support task prefixes</label>
+                                <input type="text" id="chunkPrefixQuery" name="chunkPrefixQuery" placeholder="e.g., search_query">
+                            </div>
+                        </div>
+
+                        <!-- Hidden inputs -->
+                        <input type="hidden" id="logging" name="logging" value="false">
+                        <input type="hidden" id="localModelPath" name="localModelPath" value="./models">
+                        <input type="hidden" id="modelCacheDir" name="modelCacheDir" value="./models">
+                    </div>
+                    
+                    <div class="form-footer">
+                        <button type="submit">Process Text</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="results-wrapper">
+                <div id="results" class="results-container">
+                    <div class="results-content">
+                        <div class="results-header">
+                            <h2>Results</h2>
+                            <div class="results-stats">
+                                <span id="chunkCount"></span>
+                                <span id="avgTokenLength"></span>
+                                <span id="processingTime"></span>
+                            </div>
+                        </div>
+                        <div id="defaultMessage" class="default-message">
+                            Update the "Document Text" and "Search Query" values, adjust the settings, and click "Process Text" to view the chunking and matching results here. Experiment with different settings to see how they affect the results. Once you're satisfied, use the "Get Code" button to view/copy your Chunk Match settings object for use in your own project.
+                            <a href="https://github.com/jparkerweb/chunk-match?tab=readme-ov-file#parameters" target="_blank" rel="noopener noreferrer">📚 Reference Docs</a>
+                        </div>
+                        <pre id="resultsJson"></pre>
+                    </div>
+                    <div class="results-footer">
+                        <div class="button-group">
+                            <button id="downloadButton" disabled>Download JSON Results</button>
+                            <button id="getCodeButton">Get Code</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="codeModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Code Example with Your Settings</h2>
+            <pre id="codeExample"><code class="language-javascript"></code></pre>
+            <div class="modal-footer">
+                <div class="button-group">
+                    <button id="copyCode">Copy Code</button>
+                    <button id="closeModal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="toastContainer" class="toast-container"></div>
+    <script type="module" src="main.js"></script>
+</body>
+</html> 
