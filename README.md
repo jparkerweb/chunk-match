@@ -139,6 +139,18 @@ For a complete list of supported models and their characteristics, see the [sema
 
 Each of these parameters allows you to customize the `chunkit` function to better fit the text size, content complexity, and performance requirements of your application.
 
+
+## Web UI
+
+Checkout the `webui` folder for a web-based interface for experimenting with and tuning Chunk Match settings. This tool provides a visual way to test and configure the `chunk-match` library's semantic text matching capabilities to get optimal results for your specific use case. Once you've found the best settings, you can generate code to implement them in your project.
+
+![chunk-match_web-ui](/img/chunk-match_web-ui.gif)
+
 ## License
 
-MIT
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Appreciation
+
+If you enjoy this library please consider sending me a tip to support my work 😀
+# [🍵 tip me here](https://ko-fi.com/jparkerweb)
