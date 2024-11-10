@@ -116,5 +116,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Appreciation
 
-If you enjoy this package please consider sending me a tip to support my work 😀
+If you enjoy this library please consider sending me a tip to support my work 😀
 # [🍵 tip me here](https://ko-fi.com/jparkerweb)
