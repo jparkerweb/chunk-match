@@ -46,8 +46,8 @@ const options = {
         numSimilaritySentencesLookahead: 3,
         combineChunks: true,
         combineChunksSimilarityThreshold: 0.8,
-        onnxEmbeddingModel: "Xenova/all-MiniLM-L6-v2",
-        onnxEmbeddingModelQuantized: true,
+        onnxEmbeddingModel: "nomic-ai/nomic-embed-text-v1.5",
+        dtype: 'q8',
         chunkPrefixDocument: "search_document",
         chunkPrefixQuery: "search_query"
     }
@@ -81,13 +81,15 @@ console.log(results);
     - `combineChunks` (boolean): Whether to combine similar chunks (default: true)
     - `combineChunksSimilarityThreshold` (number): Threshold for combining chunks (default: 0.6)
     - `onnxEmbeddingModel` (string): ONNX model to use for embeddings (see Models section below) (default: `Xenova/all-MiniLM-L6-v2`)
-    - `onnxEmbeddingModelQuantized` (boolean): Use quantized model version for better performance (default: `true`)
+    - `dtype`: String (optional, default `fp32`) - Precision of the embedding model (options: `fp32`, `fp16`, `q8`, `q4`).
     - `chunkPrefixDocument` (string): Prefix for document chunks (for embedding models that support task prefixes) (default: null)
     - `chunkPrefixQuery` (string): Prefix for query chunk (for embedding models that support task prefixes) (default: null)
 
-#### Note on Model Loading
+_📗 For more details on the chunking options, see the [semantic-chunking documentation](https://github.com/jparkerweb/semantic-chunking/tree/main?tab=readme-ov-file#parameters)_
 
-The first time you use a specific embedding model, it will take longer to process as the model needs to be downloaded and cached locally. Subsequent uses will be much faster since the cached model will be used.
+#### 🚨 Note on Model Loading 🚨
+
+The first time you use a specific embedding model, it will take longer to process as the model needs to be downloaded and cached locally, _please be patient._ Subsequent uses will be much faster since the cached model will be used.
 
 #### Returns
 
@@ -115,27 +117,26 @@ For a complete list of supported models and their characteristics, see the [sema
   Link to a filtered list of embedding models converted to ONNX library format by Xenova.  
   Refer to the Model table below for a list of suggested models and their sizes (choose a multilingual model if you need to chunk text other than English).  
 
-### `onnxEmbeddingModelQuantized`
+#### `dtype`
 
-- **Type**: Boolean
-- **Default**: `true`
-- **Description**: Indicates whether to use a quantized version of the specified model. Quantized models generally offer faster performance with a slight trade-off in accuracy, which can be beneficial when processing very large datasets.
+- **Type**: String
+- **Default**: `fp32`
+- **Description**: Indicates the precision of the embedding model. Options are `fp32`, `fp16`, `q8`, `q4`.
+`fp32` is the highest precision but also the largest size and slowest to load. `q8` is a good compromise between size and speed if the model supports it. All models support `fp32`, but only some support `fp16`, `q8`, and `q4`.
 
 
 #### Curated ONNX Embedding Models
 
-| Model                                        | Quantized | Link                                                                                                                                       | Size    |
-| -------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
-| nomic-ai/nomic-embed-text-v1.5               | true      | [https://huggingface.co/nomic-ai/nomic-embed-text-v1.5](https://huggingface.co/nomic-ai/nomic-embed-text-v1.5)                             | 138 MB  |
-| nomic-ai/nomic-embed-text-v1.5               | false     | [https://huggingface.co/nomic-ai/nomic-embed-text-v1.5](https://huggingface.co/nomic-ai/nomic-embed-text-v1.5)                             | 548 MB  |
-| Xenova/all-MiniLM-L6-v2                      | true      | [https://huggingface.co/Xenova/all-MiniLM-L6-v2](https://huggingface.co/Xenova/all-MiniLM-L6-v2)                                           | 23 MB   |
-| Xenova/all-MiniLM-L6-v2                      | false     | [https://huggingface.co/Xenova/all-MiniLM-L6-v2](https://huggingface.co/Xenova/all-MiniLM-L6-v2)                                           | 90.4 MB |
-| Xenova/paraphrase-multilingual-MiniLM-L12-v2 | true      | [https://huggingface.co/Xenova/paraphrase-multilingual-MiniLM-L12-v2](https://huggingface.co/Xenova/paraphrase-multilingual-MiniLM-L12-v2) | 118 MB  |
-| thenlper/gte-base                            | false     | [https://huggingface.co/thenlper/gte-base](https://huggingface.co/thenlper/gte-base)                                                       | 436 MB  |
-| Xenova/all-distilroberta-v1                  | true      | [https://huggingface.co/Xenova/all-distilroberta-v1](https://huggingface.co/Xenova/all-distilroberta-v1)                                   | 82.1 MB |
-| Xenova/all-distilroberta-v1                  | false     | [https://huggingface.co/Xenova/all-distilroberta-v1](https://huggingface.co/Xenova/all-distilroberta-v1)                                   | 326 MB  |
-| BAAI/bge-base-en-v1.5                        | false     | [https://huggingface.co/BAAI/bge-base-en-v1.5](https://huggingface.co/BAAI/bge-base-en-v1.5)                                               | 436 MB  |
-| BAAI/bge-small-en-v1.5                       | false     | [https://huggingface.co/BAAI/bge-small-en-v1.5](https://huggingface.co/BAAI/bge-small-en-v1.5)                                             | 133 MB  |
+| Model                                        | Precision (dtype) | Link                                                                                                                                       | Size                   |
+| -------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------- |
+| nomic-ai/nomic-embed-text-v1.5               | fp32, q8          | [https://huggingface.co/nomic-ai/nomic-embed-text-v1.5](https://huggingface.co/nomic-ai/nomic-embed-text-v1.5)                             | 548 MB, 138 MB         |
+| thenlper/gte-base                            | fp32              | [https://huggingface.co/thenlper/gte-base](https://huggingface.co/thenlper/gte-base)                                                       | 436 MB                 |
+| Xenova/all-MiniLM-L6-v2                      | fp32, fp16, q8    | [https://huggingface.co/Xenova/all-MiniLM-L6-v2](https://huggingface.co/Xenova/all-MiniLM-L6-v2)                                           | 23 MB, 45 MB, 90 MB    |
+| Xenova/paraphrase-multilingual-MiniLM-L12-v2 | fp32, fp16, q8    | [https://huggingface.co/Xenova/paraphrase-multilingual-MiniLM-L12-v2](https://huggingface.co/Xenova/paraphrase-multilingual-MiniLM-L12-v2) | 470 MB, 235 MB, 118 MB |
+| Xenova/all-distilroberta-v1                  | fp32, fp16, q8    | [https://huggingface.co/Xenova/all-distilroberta-v1](https://huggingface.co/Xenova/all-distilroberta-v1)                                   | 326 MB, 163 MB, 82 MB  |
+| BAAI/bge-base-en-v1.5                        | fp32              | [https://huggingface.co/BAAI/bge-base-en-v1.5](https://huggingface.co/BAAI/bge-base-en-v1.5)                                               | 436 MB                 |
+| BAAI/bge-small-en-v1.5                       | fp32              | [https://huggingface.co/BAAI/bge-small-en-v1.5](https://huggingface.co/BAAI/bge-small-en-v1.5)                                             | 133 MB                 |
+| yashvardhan7/snowflake-arctic-embed-m-onnx   | fp32              | [https://huggingface.co/yashvardhan7/snowflake-arctic-embed-m-onnx](https://huggingface.co/yashvardhan7/snowflake-arctic-embed-m-onnx)     | 436 MB                 |
 
 Each of these parameters allows you to customize the `chunkit` function to better fit the text size, content complexity, and performance requirements of your application.
 

@@ -1,6 +1,6 @@
 {
   "name": "chunk-match",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "NodeJS library that semantically chunks text and matches it against a user query using cosine similarity for precise and relevant text retrieval",
   "type": "module",
   "main": "chunk-match.js",
@@ -41,6 +41,6 @@
   },
   "homepage": "https://github.com/jparkerweb/chunk-match#readme",
   "dependencies": {
-    "semantic-chunking": "^2.2.4"
+    "semantic-chunking": "^2.3.4"
   }
 }

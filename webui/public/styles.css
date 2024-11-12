@@ -59,6 +59,10 @@ body {
 h1.title {
     margin-top: -15px;
 }
+h1.title > a > #version {
+    font-size: 0.5em;
+    filter: brightness(0.7);
+}
 .subtitle {
     font-size: 0.8em;
     color: var(--text-color);
@@ -340,17 +344,15 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 /* Similarity level colors */
-.similarity-low {
-    color: #ff6b6b;
-}
+.similarity-low { color: #ff6b6b; }
+.similarity-moderate { color: #ffd93d; }
+.similarity-high { color: #6bff84; }
 
-.similarity-moderate {
-    color: #ffd93d;
-}
-
-.similarity-high {
-    color: #6bff84;
-}
+/* Precision level colors */
+.precision-full { color: #4CAF50; }
+.precision-half { color: #2196F3; }
+.precision-q8 { color: #FF9800; }
+.precision-q4 { color: #f44336; }
 
 /* Switch styling */
 .switch {

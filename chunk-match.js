@@ -1,13 +1,13 @@
 import { chunkit, cramit } from 'semantic-chunking';
 import { cosineSimilarity } from './utils/similarity.js';
-
+import { DEFAULT_CONFIG } from './config.js';
 // -----------------------------------------------------------------
 // -- Match text chunks against a query using semantic similarity --
 // -----------------------------------------------------------------
 async function matchChunks(documents, query, options = {}) {
     const {
-        maxResults = 10,
-        minSimilarity = 0.475,
+        maxResults = DEFAULT_CONFIG.maxResults,
+        minSimilarity = DEFAULT_CONFIG.minSimilarity,
         chunkingOptions = {}
     } = options;
 
@@ -19,19 +19,25 @@ async function matchChunks(documents, query, options = {}) {
         throw new Error('Query must be a non-empty string');
     }
 
-    const {
-        maxTokenSize,
-        similarityThreshold,
-        dynamicThresholdLowerBound,
-        dynamicThresholdUpperBound,
-        numSimilaritySentencesLookahead,
-        combineChunks,
-        combineChunksSimilarityThreshold,
-        onnxEmbeddingModel,
-        onnxEmbeddingModelQuantized,
-        chunkPrefixDocument,
-        chunkPrefixQuery
+    let {
+        maxTokenSize = DEFAULT_CONFIG.maxTokenSize,
+        similarityThreshold = DEFAULT_CONFIG.similarityThreshold,
+        dynamicThresholdLowerBound = DEFAULT_CONFIG.dynamicThresholdLowerBound,
+        dynamicThresholdUpperBound = DEFAULT_CONFIG.dynamicThresholdUpperBound,
+        numSimilaritySentencesLookahead = DEFAULT_CONFIG.numSimilaritySentencesLookahead,
+        combineChunks = DEFAULT_CONFIG.combineChunks,
+        combineChunksSimilarityThreshold = DEFAULT_CONFIG.combineChunksSimilarityThreshold,
+        onnxEmbeddingModel = DEFAULT_CONFIG.onnxEmbeddingModel,
+        onnxEmbeddingModelQuantized, // legacy boolean (remove in next major version)
+        dtype = DEFAULT_CONFIG.dtype,
+        localModelPath = DEFAULT_CONFIG.localModelPath,
+        modelCacheDir = DEFAULT_CONFIG.modelCacheDir,
+        chunkPrefixDocument = DEFAULT_CONFIG.chunkPrefixDocument,
+        chunkPrefixQuery = DEFAULT_CONFIG.chunkPrefixQuery
     } = chunkingOptions;
+
+    // if legacy boolean is used (onnxEmbeddingModelQuantized), set dtype (model precision) to 'q8'
+    if (onnxEmbeddingModelQuantized === true) { dtype = 'q8'; }
 
     // Configure chunkit options
     const chunkitOptions = {
@@ -44,7 +50,9 @@ async function matchChunks(documents, query, options = {}) {
         combineChunks,
         combineChunksSimilarityThreshold,
         onnxEmbeddingModel,
-        onnxEmbeddingModelQuantized,
+        dtype,
+        localModelPath,
+        modelCacheDir,
         returnEmbedding: true,
         returnTokenLength: true,
         chunkPrefix: chunkPrefixDocument,
@@ -56,7 +64,9 @@ async function matchChunks(documents, query, options = {}) {
         logging: false,
         maxTokenSize,
         onnxEmbeddingModel,
-        onnxEmbeddingModelQuantized,
+        dtype,
+        localModelPath,
+        modelCacheDir,
         returnEmbedding: true,
         returnTokenLength: true,
         chunkPrefix: chunkPrefixQuery,

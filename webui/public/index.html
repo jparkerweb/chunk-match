@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🕵️ Chunk Match Web UI</title>
+    <title>Chunk Match Web UI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -31,7 +31,7 @@
             </a>
         </div>
         
-        <h1 class="title"><a href="/">🕵️ Chunk Match Web UI</a></h1>
+        <h1 class="title"><a href="/">🕵️ Chunk Match Web UI <span id="version"></span></a></h1>
         <div class="subtitle">Sandbox to tune your chunk match settings to get the best results for your use case</div>
         
         <div class="content-wrapper">
@@ -153,13 +153,15 @@
                                         <!-- Options will be populated by JavaScript -->
                                     </select>
                                 </div>
-
+                            </div>
+                            <div class="form-row" style="margin-top: 20px;">
                                 <div class="form-group">
-                                    <label for="onnxEmbeddingModelQuantized">Quantized Model:</label>
-                                    <label class="switch">
-                                        <input type="checkbox" id="onnxEmbeddingModelQuantized" name="onnxEmbeddingModelQuantized" checked>
-                                        <span class="slider"></span>
-                                    </label>
+                                    <label for="dtype">Model Precision:</label>
+                                    <input type="range" id="dtype" name="dtype" min="0" max="3" value="0" step="1">
+                                    <div class="range-value">
+                                        <span class="number"></span>
+                                        <span class="description"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

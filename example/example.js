@@ -14,18 +14,19 @@ const options = {
     chunkingOptions: {
         maxTokenSize: 500,
         similarityThreshold: 0.5,
-        dynamicThresholdLowerBound: 0.3,
+        dynamicThresholdLowerBound: 0.4,
         dynamicThresholdUpperBound: 0.8,
-        numSimilaritySentencesLookahead: 2,
+        numSimilaritySentencesLookahead: 3,
         combineChunks: true,
-        combineChunksSimilarityThreshold: 0.5,
+        combineChunksSimilarityThreshold: 0.7,
         onnxEmbeddingModel: "Xenova/all-MiniLM-L6-v2",
-        onnxEmbeddingModelQuantized: true,
-        chunkPrefixDocument: "search_document",
-        chunkPrefixQuery: "search_query"
+        dtype: "q8",
+        localModelPath: "./models",
+        modelCacheDir: "./models",
     }
 };
 
+console.time('matchChunksDuration');
 const results = await matchChunks(documents, 'cosine similarity LLM RAG vector embeddings', options);
-
 console.log(results);
+console.timeEnd('matchChunksDuration');

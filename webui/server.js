@@ -4,12 +4,19 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { matchChunks } from '../chunk-match.js';
 import dotenv from 'dotenv';
+import { readFileSync } from 'fs';
 
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Read package.json
+const packageJson = JSON.parse(readFileSync(path.join(__dirname, 'package.json'), 'utf8'));
+const VERSION = packageJson.version;
+
+
+// Initialize Express app
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -20,14 +27,14 @@ app.use(express.json({ limit: '50mb' }));
 // Serve static files from public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Serve node_modules directory (only for highlight.js)
-app.use('/node_modules/highlight.js', express.static(
-  path.join(__dirname, 'node_modules/highlight.js')
-));
-
 // Basic route
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Add a new route to serve the version
+app.get('/version', (req, res) => {
+    res.json({ version: VERSION });
 });
 
 // Chunking API endpoint
@@ -43,6 +50,10 @@ app.post('/api/match', async (req, res) => {
             return res.status(400).json({ error: 'Query is required' });
         }
 
+        // Convert dtype value to string mapping
+        const dtypeValues = ['fp32', 'fp16', 'q8', 'q4'];
+        const dtype = dtypeValues[parseInt(chunkingOptions.dtype)] || 'fp32';
+
         // Process options
         const processedOptions = {
             maxResults: parseInt(maxResults),
@@ -56,7 +67,7 @@ app.post('/api/match', async (req, res) => {
                 numSimilaritySentencesLookahead: parseInt(chunkingOptions.numSimilaritySentencesLookahead),
                 combineChunks: chunkingOptions.combineChunks === true,
                 combineChunksSimilarityThreshold: parseFloat(chunkingOptions.combineChunksSimilarityThreshold),
-                onnxEmbeddingModelQuantized: chunkingOptions.onnxEmbeddingModelQuantized === true
+                dtype: dtype
             }
         };
 

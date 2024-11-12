@@ -1,3 +1,6 @@
+// import form default values
+import defaultFormValues from './default-form-values.js';
+
 // Load sample text on page load
 fetch('sample.txt')
     .then(response => response.text())
@@ -21,6 +24,9 @@ fetch('models.json')
             option.textContent = model.label;
             select.appendChild(option);
         });
+        
+        // Set default model value after options are populated
+        select.value = defaultFormValues.onnxEmbeddingModel;
     })
     .catch(error => console.error('Error loading models:', error));
 
@@ -220,7 +226,7 @@ form.addEventListener('submit', async (e) => {
                 combineChunks: form.elements['combineChunks'].checked,
                 combineChunksSimilarityThreshold: formData.get('combineChunksSimilarityThreshold'),
                 onnxEmbeddingModel: formData.get('onnxEmbeddingModel'),
-                onnxEmbeddingModelQuantized: form.elements['onnxEmbeddingModelQuantized'].checked,
+                dtype: formData.get('dtype'),
                 chunkPrefixDocument: formData.get('chunkPrefixDocument') || undefined,
                 chunkPrefixQuery: formData.get('chunkPrefixQuery') || undefined
             }
@@ -356,6 +362,10 @@ function generateCode(formData) {
         document_text: "${doc.document_text.substring(0, 50)}..."
     }`).join(',\n');
 
+    // Map dtype value to string
+    const dtypeValues = ['fp32', 'fp16', 'q8', 'q4'];
+    const dtype = dtypeValues[parseInt(formData.dtype)] || 'fp32';
+
     return `// import the chunk-match library
 import { matchChunks } from 'chunk-match';
 
@@ -380,7 +390,7 @@ const options = {
         combineChunks: ${formData.combineChunks},
         combineChunksSimilarityThreshold: ${formData.combineChunksSimilarityThreshold},
         onnxEmbeddingModel: "${formData.onnxEmbeddingModel}",
-        onnxEmbeddingModelQuantized: ${formData.onnxEmbeddingModelQuantized}${formData.chunkPrefixDocument ? `,
+        dtype: "${dtype}"${formData.chunkPrefixDocument ? `,
         chunkPrefixDocument: "${formData.chunkPrefixDocument}"` : ''}${formData.chunkPrefixQuery ? `,
         chunkPrefixQuery: "${formData.chunkPrefixQuery}"` : ''}
     }
@@ -499,3 +509,93 @@ resizeToggle.addEventListener('click', () => {
     resultsJson.classList.toggle('wrapped');
     resizeToggle.classList.toggle('wrapped');
 });
+
+
+const dtypeInput = document.getElementById('dtype');
+const dtypeDisplay = dtypeInput.nextElementSibling;
+
+function updateDtypeDisplay(value) {
+    const dtypeValues = {
+        0: { text: 'fp32 - Full Precision', class: 'precision-full' },
+        1: { text: 'fp16 - Half Precision', class: 'precision-half' },
+        2: { text: 'q8 - 8-bit Quantized', class: 'precision-q8' },
+        3: { text: 'q4 - 4-bit Quantized', class: 'precision-q4' }
+    };
+    
+    const dtype = dtypeValues[value];
+    const number = dtypeDisplay.querySelector('.number');
+    const description = dtypeDisplay.querySelector('.description');
+    
+    number.className = `number ${dtype.class}`;
+    number.textContent = value;
+    description.className = `description ${dtype.class}`;
+    description.textContent = dtype.text;
+}
+
+// Initial update
+updateDtypeDisplay(dtypeInput.value);
+
+// Update on change
+dtypeInput.addEventListener('input', (e) => updateDtypeDisplay(e.target.value));
+
+// Fetch and display version
+fetch('/version')
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('version').textContent = `v${data.version}`;
+    })
+    .catch(error => console.error('Error fetching version:', error));
+
+// Add this function after the imports
+function setDefaultFormValues() {
+    // Set range inputs
+    const rangeInputs = {
+        maxResults: defaultFormValues.maxResults,
+        minSimilarity: defaultFormValues.minSimilarity,
+        maxTokenSize: defaultFormValues.maxTokenSize,
+        similarityThreshold: defaultFormValues.similarityThreshold,
+        dynamicThresholdLowerBound: defaultFormValues.dynamicThresholdLowerBound,
+        dynamicThresholdUpperBound: defaultFormValues.dynamicThresholdUpperBound,
+        numSimilaritySentencesLookahead: defaultFormValues.numSimilaritySentencesLookahead,
+        combineChunksSimilarityThreshold: defaultFormValues.combineChunksSimilarityThreshold,
+    };
+
+    // Set each range input and trigger their display updates
+    Object.entries(rangeInputs).forEach(([id, value]) => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.value = value;
+            input.dispatchEvent(new Event('input'));
+        }
+    });
+
+    // Set checkbox
+    const combineChunksCheckbox = document.getElementById('combineChunks');
+    if (combineChunksCheckbox) {
+        combineChunksCheckbox.checked = defaultFormValues.combineChunks;
+        combineChunksCheckbox.dispatchEvent(new Event('change'));
+    }
+
+    // Set text inputs
+    const textInputs = {
+        chunkPrefixDocument: defaultFormValues.chunkPrefixDocument,
+        chunkPrefixQuery: defaultFormValues.chunkPrefixQuery
+    };
+
+    Object.entries(textInputs).forEach(([id, value]) => {
+        const input = document.getElementById(id);
+        if (input && value !== null) {
+            input.value = value;
+        }
+    });
+
+    // Set dtype (model precision)
+    const dtypeInput = document.getElementById('dtype');
+    if (dtypeInput) {
+        const dtypeValues = { fp32: 0, fp16: 1, q8: 2, q4: 3 };
+        dtypeInput.value = dtypeValues[defaultFormValues.dtype] || 0;
+        dtypeInput.dispatchEvent(new Event('input'));
+    }
+}
+
+setDefaultFormValues();
