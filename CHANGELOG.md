@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.1] - 2024-11-13
+### Updated
+- Updated `semantic-chunking` library to v2.3.5 (remove unnecessary logging)
+
 ## [1.1.0] - 2024-11-12
 ### Updated
 - Updated `semantic-chunking` library to v2.3.x (transformers.js v3)
