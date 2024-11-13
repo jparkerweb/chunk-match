@@ -1,7 +1,11 @@
-**/node_modules/
-**/models/
-**/cache/
-.env
 .git/
 .github/
-
+.vault/
+**/cache/
+**/models/
+**/node_modules/
+.aider*
+**/.env
+.cursorignore
+.cursorrules
+.gitignore
