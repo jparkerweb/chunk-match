@@ -124,8 +124,33 @@
               "icon": "lucide-tags",
               "title": "Tags"
             }
+          },
+          {
+            "id": "2fbee714b8bbd157",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "815a886290ffc234",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -142,8 +167,8 @@
   "active": "79f31c3962671964",
   "lastOpenFiles": [
     "🕵️ Chunk Match.md",
-    "images/releases/v1.1.0.jpg",
     "releases/v1.1.0 - 📦 Transformers.js v3.md",
+    "images/releases/v1.1.0.jpg",
     "images/releases",
     "= attachments/robot-blocks-1.png",
     "releases",
