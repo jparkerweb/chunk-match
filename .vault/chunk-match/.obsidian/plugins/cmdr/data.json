@@ -4,7 +4,15 @@
   "debug": false,
   "editorMenu": [],
   "fileMenu": [],
-  "leftRibbon": [],
+  "leftRibbon": [
+    {
+      "id": "app:reload",
+      "icon": "lucide-power",
+      "name": "Reload app without saving",
+      "mode": "any",
+      "color": "#ffc800"
+    }
+  ],
   "rightRibbon": [],
   "titleBar": [],
   "statusBar": [],
@@ -15,7 +23,7 @@
     "statusbar": [],
     "leftRibbon": []
   },
-  "spacing": 8,
+  "spacing": "8",
   "advancedToolbar": {
     "rowHeight": 48,
     "rowCount": 1,

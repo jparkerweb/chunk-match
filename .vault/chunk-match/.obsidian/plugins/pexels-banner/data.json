@@ -43,8 +43,12 @@
   "showPinIcon": true,
   "pinnedImageFolder": "pixel-banner-images",
   "showReleaseNotes": true,
-  "lastVersion": "2.9.1",
+  "lastVersion": "2.10.0",
   "showRefreshIcon": true,
   "hidePixelBannerFields": true,
-  "hidePropertiesSectionIfOnlyBanner": true
+  "hidePropertiesSectionIfOnlyBanner": true,
+  "titleColor": "#000000",
+  "customTitleColorField": [
+    "banner-title-color"
+  ]
 }

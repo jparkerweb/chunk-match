@@ -13,16 +13,27 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "releases/v1.1.0 - 📦 Transformers.js v3.md",
-                "mode": "preview",
+                "file": "🕵️ Chunk Match.md",
+                "mode": "source",
                 "backlinks": false,
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "v1.1.0 - 📦 Transformers.js v3"
+              "title": "🕵️ Chunk Match"
+            }
+          },
+          {
+            "id": "7b5fcd16d3a7dc83",
+            "type": "leaf",
+            "state": {
+              "type": "custom-frames-📄-release-notes",
+              "state": {},
+              "icon": "lucide-notebook-pen",
+              "title": "📄 release notes"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -158,13 +169,15 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "obsidian-custom-frames:Open 📄 release notes": false,
+      "cmdr:Reload app without saving": false,
       "switcher:Open quick switcher": false,
       "templates:Insert template": true,
       "command-palette:Open command palette": false,
-      "callout-manager:Insert Callout": false
+      "callout-manager:Insert Callout": true
     }
   },
-  "active": "79f31c3962671964",
+  "active": "7b5fcd16d3a7dc83",
   "lastOpenFiles": [
     "🕵️ Chunk Match.md",
     "releases/v1.1.0 - 📦 Transformers.js v3.md",
