@@ -41,6 +41,6 @@
   },
   "homepage": "https://github.com/jparkerweb/chunk-match#readme",
   "dependencies": {
-    "semantic-chunking": "^2.3.5"
+    "semantic-chunking": "^2.3.6"
   }
 }

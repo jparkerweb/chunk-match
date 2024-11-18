@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.2] - 2024-11-18
+### 📦 Updated
+- Update `string-segmenter` patch version
+
 ## [1.1.1] - 2024-11-13
 ### 📦 Updated
 - `semantic-chunking` library to v2.3.5 (remove unnecessary logging)
