@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "homepage": "https://www.equilllabs.com/projects/chunk-match.html",
+  "homepage": "https://www.equilllabs.com/projects/chunk-match",
   "repository": {
     "type": "git",
     "url": "https://github.com/jparkerweb/chunk-match.git"
