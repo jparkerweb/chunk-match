@@ -1,15 +1,20 @@
 {
   "name": "chunk-match",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "description": "NodeJS library that semantically chunks text and matches it against a user query using cosine similarity for precise and relevant text retrieval",
   "type": "module",
   "main": "chunk-match.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "homepage": "https://www.equilllabs.com/projects/chunk-match.html",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jparkerweb/chunk-match.git"
+    "url": "https://github.com/jparkerweb/chunk-match.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jparkerweb/chunk-match/issues",
+    "email": "equilllabs@gmail.com"
   },
   "keywords": [
     "semantic",
@@ -36,11 +41,7 @@
   ],
   "author": "Justin Parker",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jparkerweb/chunk-match/issues"
-  },
-  "homepage": "https://github.com/jparkerweb/chunk-match#readme",
   "dependencies": {
-    "semantic-chunking": "^2.3.6"
+    "semantic-chunking": "^2.3.7"
   }
 }
