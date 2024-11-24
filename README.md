@@ -2,11 +2,13 @@
 
 A NodeJS library that semantically chunks text and matches it against a user query using cosine similarity for precise and relevant text retrieval.
 
-## Installation
+### Maintained by
+<a href="https://www.equilllabs.com">
+  <img src="https://raw.githubusercontent.com/jparkerweb/eQuill-Labs/refs/heads/main/src/static/images/logo-text-outline.png" alt="eQuill Labs" height="40">
+</a>
 
-```bash
-npm install chunk-match
-```
+<br>
+<br>
 
 ## Features
 
@@ -16,6 +18,12 @@ npm install chunk-match
 - Returns chunks sorted by relevance with similarity scores
 - Built on top of semantic-chunking for robust text processing
 - Support for various ONNX embedding models
+
+## Installation
+
+```bash
+npm install chunk-match
+```
 
 ## Usage
 
