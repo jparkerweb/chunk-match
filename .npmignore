@@ -4,7 +4,6 @@
 **/cache/
 **/models/
 **/node_modules/
-.aider*
 **/.env
 .cursorignore
 .cursorrules
