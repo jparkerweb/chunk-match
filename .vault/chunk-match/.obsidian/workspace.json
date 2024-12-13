@@ -13,13 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "🕵️ Chunk Match.md",
-                "mode": "source",
+                "file": "releases/v1.1.0 - 📦 Transformers.js v3.md",
+                "mode": "preview",
                 "backlinks": false,
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "🕵️ Chunk Match"
+              "title": "v1.1.0 - 📦 Transformers.js v3"
             }
           },
           {
@@ -32,8 +32,7 @@
               "title": "📄 release notes"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -154,6 +153,16 @@
             "id": "815a886290ffc234",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "72bfa57dd16d7375",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -161,11 +170,12 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 358.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -177,7 +187,7 @@
       "callout-manager:Insert Callout": true
     }
   },
-  "active": "7b5fcd16d3a7dc83",
+  "active": "72bfa57dd16d7375",
   "lastOpenFiles": [
     "🕵️ Chunk Match.md",
     "releases/v1.1.0 - 📦 Transformers.js v3.md",

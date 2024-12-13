@@ -24,31 +24,36 @@
   "customImageRepeatField": [
     "banner-repeat"
   ],
+  "customBannerHeightField": [
+    "banner-height"
+  ],
+  "customFadeField": [
+    "banner-fade"
+  ],
+  "customBorderRadiusField": [
+    "banner-radius"
+  ],
+  "customTitleColorField": [
+    "banner-title-color"
+  ],
+  "customBannerShuffleField": [
+    "banner-shuffle"
+  ],
   "folderImages": [],
   "contentStartPosition": 150,
   "imageDisplay": "cover",
   "imageRepeat": false,
   "bannerHeight": 350,
-  "customBannerHeightField": [
-    "banner-height"
-  ],
   "fade": -75,
-  "customFadeField": [
-    "banner-fade"
-  ],
   "borderRadius": 17,
-  "customBorderRadiusField": [
-    "banner-radius"
-  ],
   "showPinIcon": true,
   "pinnedImageFolder": "pixel-banner-images",
   "showReleaseNotes": true,
-  "lastVersion": "2.10.0",
+  "lastVersion": "2.13.1",
   "showRefreshIcon": true,
+  "showViewImageIcon": false,
   "hidePixelBannerFields": true,
   "hidePropertiesSectionIfOnlyBanner": true,
   "titleColor": "#000000",
-  "customTitleColorField": [
-    "banner-title-color"
-  ]
+  "enableImageShuffle": false
 }
