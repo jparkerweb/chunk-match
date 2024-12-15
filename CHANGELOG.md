@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.4] - 2024-12-15
+### 📦 Updated
+- Update `semantic-chunking` patch version
+- Add caching for document and query embeddings using `lru-cache`
+
 ## [1.1.3] - 2024-11-18
 ### 📦 Updated
 - Update `semantic-chunking` patch version

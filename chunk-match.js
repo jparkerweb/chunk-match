@@ -1,6 +1,22 @@
 import { chunkit, cramit } from 'semantic-chunking';
 import { cosineSimilarity } from './utils/similarity.js';
 import { DEFAULT_CONFIG } from './config.js';
+import { LRUCache } from 'lru-cache';
+
+// Cache for document chunk embeddings
+const documentEmbeddingCache = new LRUCache({
+  max: 1000, // Adjust based on your memory constraints
+  ttl: 1000 * 60 * 60, // 1 hour TTL
+  updateAgeOnGet: true
+});
+
+// Cache for query embeddings
+const queryEmbeddingCache = new LRUCache({
+  max: 500,
+  ttl: 1000 * 60 * 15, // 15 minutes TTL
+  updateAgeOnGet: true
+});
+
 // -----------------------------------------------------------------
 // -- Match text chunks against a query using semantic similarity --
 // -----------------------------------------------------------------
@@ -73,13 +89,22 @@ async function matchChunks(documents, query, options = {}) {
         excludeChunkPrefixInResults: true
     };
 
-    // Process all documents and get chunks with embeddings
+    // Process documents with caching
     const chunkedDocs = await Promise.all(
         documents.map(async (doc) => {
-            const chunks = await chunkit(
-                [doc], 
-                chunkitOptions
-            );
+            const cacheKey = `${doc.document_name}-${doc.document_text}`;
+            const cached = documentEmbeddingCache.get(cacheKey);
+            
+            if (cached) {
+                return cached.map(chunk => ({
+                    ...chunk,
+                    document_name: doc.document_name
+                }));
+            }
+
+            const chunks = await chunkit([doc], chunkitOptions);
+            documentEmbeddingCache.set(cacheKey, chunks);
+            
             return chunks.map(chunk => ({
                 ...chunk,
                 document_name: doc.document_name
@@ -90,12 +115,18 @@ async function matchChunks(documents, query, options = {}) {
     // Flatten chunks from all documents
     const allChunks = chunkedDocs.flat();
 
-    // Get query embedding
-    const queryChunk = await cramit(
-        [{ document_name: 'query', document_text: query }],
-        cramitOptions
-    );
-    const queryEmbedding = queryChunk[0].embedding;
+    // Get query embedding with caching
+    const queryCacheKey = query;
+    let queryEmbedding = queryEmbeddingCache.get(queryCacheKey);
+
+    if (!queryEmbedding) {
+        const queryChunk = await cramit(
+            [{ document_name: 'query', document_text: query }],
+            cramitOptions
+        );
+        queryEmbedding = queryChunk[0].embedding;
+        queryEmbeddingCache.set(queryCacheKey, queryEmbedding);
+    }
 
     // Calculate similarities and sort results
     const results = allChunks
