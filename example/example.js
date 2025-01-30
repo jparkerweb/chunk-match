@@ -1,12 +1,16 @@
 import { matchChunks } from '../chunk-match.js';
 import fs from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const textFiles = ['text-1.txt', 'text-2.txt', 'text-3.txt', 'text-4.txt', 'text-5.txt', 'text-6.txt', 'text-7.txt', 'text-8.txt', 'text-9.txt', 'text-10.txt'];
 const documents = await Promise.all(textFiles.map(async (textFile) => {
-    let text = await fs.promises.readFile(textFile, 'utf8');
+    let text = await fs.promises.readFile(join(__dirname, textFile), 'utf8');
     return { document_name: textFile, document_text: text };
 }));
-
 
 const options = {
     maxResults: 15,
