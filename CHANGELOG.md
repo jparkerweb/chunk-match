@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.6] - 2025-01-30
+### 📦 Updated
+- `semantic-chunking` dependency update
+
+## [1.1.5] - 2024-12-15
+### 📦 Updated
+- Dependency updates
+- Docs update
+
 ## [1.1.4] - 2024-12-15
 ### 📦 Updated
 - Update `semantic-chunking` patch version
