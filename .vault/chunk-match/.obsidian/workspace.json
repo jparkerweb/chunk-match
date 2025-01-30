@@ -13,23 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "releases/v1.1.0 - 📦 Transformers.js v3.md",
+                "file": "🕵️ Chunk Match.md",
                 "mode": "preview",
-                "backlinks": false,
-                "source": true
+                "source": true,
+                "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "v1.1.0 - 📦 Transformers.js v3"
-            }
-          },
-          {
-            "id": "7b5fcd16d3a7dc83",
-            "type": "leaf",
-            "state": {
-              "type": "custom-frames-📄-release-notes",
-              "state": {},
-              "icon": "lucide-notebook-pen",
-              "title": "📄 release notes"
+              "title": "🕵️ Chunk Match"
             }
           }
         ]
@@ -51,7 +41,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -163,6 +154,26 @@
             "id": "72bfa57dd16d7375",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "6707936c7970350a",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
+            }
+          },
+          {
+            "id": "6247d12e5d33c439",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
@@ -170,7 +181,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 7
       }
     ],
     "direction": "horizontal",
@@ -179,17 +190,19 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "obsidian-custom-frames:Open 📄 release notes": false,
-      "cmdr:Reload app without saving": false,
       "switcher:Open quick switcher": false,
       "templates:Insert template": true,
       "command-palette:Open command palette": false,
-      "callout-manager:Insert Callout": true
+      "cmdr:Reload app without saving": false,
+      "callout-manager:Insert Callout": false,
+      "obsidian-custom-frames:Open 📄 release notes": false
     }
   },
-  "active": "72bfa57dd16d7375",
+  "active": "79f31c3962671964",
   "lastOpenFiles": [
     "🕵️ Chunk Match.md",
+    "pixel-banner-images/wooden-blocks.png",
+    "pixel-banner-images",
     "releases/v1.1.0 - 📦 Transformers.js v3.md",
     "images/releases/v1.1.0.jpg",
     "images/releases",
